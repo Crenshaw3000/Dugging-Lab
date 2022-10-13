@@ -7,15 +7,17 @@ const addButtons = document.querySelectorAll('.add-to-order');
 for (const button of addButtons) {
   button.addEventListener('click', () => {
     const item = button.id;
+    const url = `/update-cart.json?item=${item}`;
 
-    fetch(`/update-cart.json`)
+    fetch(url)
       .then((response) => response.json())
-      .then((result) => {
-        cart = result.cart;
-        orderTotal = result.total;
+      .then((resultJson) => {
+        cart = resultJson.cart;
+        orderTotal = resultJson.total;
+        displayCart(cart);
+        displayOrderTotal(orderTotal);
       });
-    displayCart(cart);
-    displayOrderTotal(orderTotal);
+    
   });
 }
 
